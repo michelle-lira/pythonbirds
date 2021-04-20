@@ -1,4 +1,6 @@
 class Pessoa:
+    olhos = 2  # atributo default ou atributo de classe
+
     def __init__(self, *filhos, nome=None, idade=25):
         self.idade = idade
         self.nome = nome  # sel.nome->atributo do objeto | nome->parâmetro
@@ -34,4 +36,11 @@ if __name__ == '__main__':
     print(luciano.__dict__)  # verificar todos os atributos de instância
     print(benjamin.__dict__)  # verificar todos os atributos de instância
     del luciano.filhos
+    luciano.olhos = 1  # agora vai aparecer no __dict__, porque foi alterado na instância
+    del luciano.olhos
     print(luciano.__dict__)  # verificar todos os atributos de instância (os do __init__ e os criados dinamicamente)
+    # print(Pessoa.olhos)  # não faria sentido tentar saber isso, pois não é um atributo de classe
+    # Pessoa.olhos = 3  # altera qtd de olhos para toda a classe
+    print(luciano.olhos)
+    print(benjamin.olhos)
+    print(id(Pessoa.olhos), id(luciano.olhos), id(benjamin.olhos))
