@@ -7,7 +7,8 @@ class Pessoa:
         self.filhos = list(filhos)
 
     def cumprimentar(self):  # atributo da classe
-        return f'Olá {id(self)}'
+        # return f'Olá {id(self)}'
+        return f'Olá, meu nome é {self.nome}'
 
     @staticmethod  # funciona como uma função atrelada à classe
     def metodo_estatico():  # Independe do objeto, por isso ñ tem parâmetro
@@ -18,10 +19,22 @@ class Pessoa:
         return f'{cls} - olhos {cls.olhos}'
 
 
+class Homem(Pessoa):
+    def cumprimentar(self):
+        cumprimentar_da_classe = super().cumprimentar()
+        return f'{cumprimentar_da_classe}. Aperto de mão'
+
+
+class Mutante(Pessoa):
+    olhos = 3
+
+
 if __name__ == '__main__':
     # p = Pessoa('Ben')
-    benjamin = Pessoa(nome='Benjamin')
-    luciano = Pessoa(benjamin, nome='Luciano')
+    # benjamin = Homem(nome='Benjamin')  # ou Pessoa, classe mãe
+    benjamin = Mutante(nome='Benjamin')
+    # luciano = Pessoa(benjamin, nome='Luciano')
+    luciano = Homem(benjamin, nome='Luciano')
     # print(Pessoa.cumprimentar(p))  # passando o parâmetro p
     print(Pessoa.cumprimentar(luciano))
     # print(id(p))
@@ -54,3 +67,12 @@ if __name__ == '__main__':
     print(id(Pessoa.olhos), id(luciano.olhos), id(benjamin.olhos))
     print(Pessoa.metodo_estatico(), luciano.metodo_estatico())
     print(Pessoa.nome_e_atributos_de_classe(), luciano.nome_e_atributos_de_classe())
+
+    pessoa = Pessoa('Anônimo')
+    print(isinstance(pessoa, Pessoa))
+    print(isinstance(pessoa, Homem))
+    print(isinstance(benjamin, Pessoa))
+    print(isinstance(benjamin, Homem))
+    print(benjamin.olhos)
+    print(luciano.cumprimentar())
+    print(benjamin.cumprimentar())
